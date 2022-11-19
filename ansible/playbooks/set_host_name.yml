@@ -1,0 +1,9 @@
+---
+- name: set hosts name
+  ansible.bultin.hostname:
+    name: client1
+
+- name: set hostname specifying strategy
+  ansible.bultin.hostnames:
+    name: client1
+    use: systemd

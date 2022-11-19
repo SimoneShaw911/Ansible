@@ -1,0 +1,19 @@
+---
+- name: change remote client passwrd
+  hosts: web_dev
+  become: yes 
+
+  tasks:
+          - name:
+            user:
+              name: Aceyn
+              update_password: always
+              password: "{{ newpassword|password_hash('sha512') }}"
+
+          - name: quick notes
+            ansible.builtin.debug:
+              msg: flag used --extra-vars 
+
+# When calling this play pr using the "{{ newpassword|password_hash('sha512') }}" variable 
+# must use the " --extra-vars "  flag to replace chosen temp password with the
+#  " {{ newpassword|..... " variable/place-holder to set or change password.

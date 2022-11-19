@@ -1,0 +1,17 @@
+---
+- name: creating users/password on client
+  hosts: web_dev
+  become: yes  
+
+  tasks:
+          - name: create user
+            user:
+              name: aceyn
+              home: /home/aceyn
+              shell: /bin/bash
+
+          - name: change user password
+            user:
+              name: aceyn
+              update_password: always
+              password: " {{ newpassword|password_hash('sha512') }} " 

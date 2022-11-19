@@ -1,0 +1,23 @@
+# downloading packages
+
+---
+- name: create a directory and download tomcat from url
+  hosts: web_dev
+  become: yes
+
+  tasks:
+          - name: create a directoey
+            file:
+              path: /opt/tomcat
+              state: directory
+              mode: 0755
+              owner: root
+              group: root
+
+          - name: download Tomcat using get_url
+            get_url:
+              url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27-fulldocs.tar.gz 
+              dest: /opt/tomcat
+              mode: 0755
+              group: Aceyn
+              owner: Aceyn

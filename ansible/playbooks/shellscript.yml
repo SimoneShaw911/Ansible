@@ -1,0 +1,9 @@
+---
+- name: running shell script.
+  hosts: allclients
+  become:
+
+  tasks:
+  - name:
+    shell:
+
