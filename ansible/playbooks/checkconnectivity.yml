@@ -1,0 +1,8 @@
+---
+- name: test connectivity
+  hosts: " {{ client1}} "
+  become: yes
+
+  tasks: 
+  - name: check connection
+    ping:

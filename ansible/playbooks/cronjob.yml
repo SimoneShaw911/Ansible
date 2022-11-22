@@ -1,0 +1,16 @@
+---
+- name: creat a cron job
+  hosts: web_dev
+  become: yes
+
+  tasks:
+    - name: This task admin by ansible
+      cron:
+        name: scheduled by ansible
+        minute: "0"
+        hour: "10"
+        day: "*"
+        month: "*"
+        weekday: "4"
+        user: root
+        job: "/home/ec2-user/cfile.sh"

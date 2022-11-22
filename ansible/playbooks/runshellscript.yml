@@ -1,0 +1,7 @@
+---
+- name: run script on client
+  hosts: web_dev
+
+  tasks: 
+    - name: shell script
+      shell: "/home/ec2-user/cfile.sh"

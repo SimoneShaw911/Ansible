@@ -1,0 +1,31 @@
+# create and add storage on vm oricle box
+---
+- name: create and mount new storage.
+  hosts:
+  
+  tasks:
+          - name: create new partition
+            parted:
+                    name: files
+                    label: gpt
+                    device: /dev/sdb
+                    number: 1
+                    state: present
+                    part_start:
+                    part_end:
+
+          - name: create xfs filesystem
+            filesystem:
+                    dev: /dev/sdb1
+                    fstype: xfs
+                    
+          - name: create mount directory
+            file:
+                    path: /data
+                    state: directory
+
+          - name: mount the file system
+            mount:
+                    src: dev/sdb1
+                    fstype: xfs
+                    state: mounted
