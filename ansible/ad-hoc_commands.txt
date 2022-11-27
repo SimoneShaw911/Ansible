@@ -1,0 +1,32 @@
+#ad-hoc notes
+
+# like other sections of course current user permissions are not set correctly causeing some command to 
+throw errors. some errors make no mention of permissions or privileges
+
+Flag [--become -K] is how to escalate privleges with ad-hoc
+
+syntax for ad-hocs
+
+
+     ansible [target] -m [module] -a "[module options]"
+     example 
+	ansible localhost -m ping
+	
+     # creating/removing files one "all"[web_dev]  remote clients
+	ansible web_dev -m file -a "path=/home/ec2-user/adhoc1 state=touch mode=700"
+							      {state=absent}
+     # installing/unistalling packages 
+	ansible web_dev -m yum -a "name=httpd state=present"
+					     {state=absent}
+     # staring/stopping services and "enabled" option which configures service to enable at boot.
+	ansible web_dev -m service -a "name=httpd state=started enabled=yes"
+
+     # creating/removing user on remote clients while defining home path & shell env
+	ansible web_dev -m user -a "name=Alessia home=/home/Alessia shell=/bin/bash state=present"
+     # add to specific group			{group=examp}				   {state=absent}
+
+     #also can delete with shell scripting
+	ansible web_dev -m shell -a "userdel Alessia"
+
+     #getting system info from remote
+	ansible [target] -m setup
