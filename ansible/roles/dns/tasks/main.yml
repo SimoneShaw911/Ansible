@@ -1,5 +1,5 @@
 ---
-- name: install DNS
+- name: Install DNS
   yum:
     name: named
     state: present
