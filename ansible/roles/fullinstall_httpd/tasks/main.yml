@@ -1,0 +1,21 @@
+---
+- name: install httpd packages
+  yum:
+    name: httpd
+    state: present
+
+- name: start httpd service
+  service:
+    name: httpd
+    state: started
+
+- name: open port 80 for http acces
+  firewalld:
+    service: http
+    permanent: true
+    state: enabled
+
+- name: reload firewalld to pickup changes
+  service:
+    name: httpd
+    state: reloaded

@@ -1,0 +1,3 @@
+### role by application
+# example of this would be having roles to install packages by package name.
+# will generally need to become root 

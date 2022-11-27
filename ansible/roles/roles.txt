@@ -1,0 +1,35 @@
+# notes on roles
+
+# when installing ansible a roles directory is created in the path /etc/ansible/roles.
+# this is where you define roles by:
+	- making directory for each role
+		* can create roles based on server by naming directory after group/server
+	- create sub-directory "tasks" within each directory
+	- within task directory is where you define the yaml file that is the funtion of 
+	  the role.
+	- example: basic_install_httpd/tasks/main.yml
+	            ^directory         ^dir  ^
+					     ^ role
+
+	- example: rolename/tasks(dir)/role-function
+
+ 
+# Noticed a difference from playbooks. roles have NO HOSTS OR TASKS DEFINED in the yaml 
+syntax.
+	- example : ---                          - incorrect: ---
+		    - name: install httpd      |              - name: install httpd
+		      yum:                     |		hosts: all
+			name: httpd           v|s               tasks:
+			state: present         |		  - name: install httpd
+                                               |                    yum:
+                                               |                      name: httpd
+								      state: present
+
+# role make it easier to write playbook. how iterative can roles be in developing plays?
+# must understand privilege escalation as it pertains to roles.
+	currently:  use --become with -K
+		    escalate througout play book as neccesary
+	possible:?
+		    change main.yml to task.yml then write to main
+			---
+			- { include: tasks.yml, become: yes }

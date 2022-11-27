@@ -1,0 +1,5 @@
+---
+- name: reload httpd to pickup changes
+  service:
+    name: httpd
+    state: reloaded
