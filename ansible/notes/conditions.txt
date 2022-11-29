@@ -1,0 +1,17 @@
+#Allow Ansible to take actions based on certain conditions
+
+- name:
+  hosts:
+  
+  tasks:
+	- name: install httpd ubuntu
+	  yum
+	    name: httpd
+	    state: present
+	  when: ansible_os_family == "ubuntu"
+
+	- name: install httpd Centos
+	  yum:
+	    name: httpd
+	    state:
+	  when: ansible_os_family == "redhat"

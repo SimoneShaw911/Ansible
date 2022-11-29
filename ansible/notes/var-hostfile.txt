@@ -1,0 +1,10 @@
+# can use in inventory/hosts file
+
+[webservers]
+
+
+[abc:vars]
+fooserver=foo.abc.example.com
+ntpserver=ntp.abc.example
+
+#need more sources on vairiables

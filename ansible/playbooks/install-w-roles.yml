@@ -1,0 +1,9 @@
+---
+- name: install applications
+  hosts: client2
+  become: yes
+
+  roles:
+  - apache
+  - docker
+  - dns

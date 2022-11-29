@@ -1,0 +1,57 @@
+#variables are containers that hold the defined value which can be used repetitively
+
+#important things to remember
+	- name can include letters, number, and underscore
+	- name should start with a letter
+	- cannot have spaces, dots (.), or hyphen (-) in variable name
+	- can be defined in inventory files as well. (hosts file?)
+        - when defining var must be in format:
+			* notice in multi-vids spaces between var and brackets
+					"{{ example }}"	
+# defining variable in the playbook
+
+	- name: Install some package
+	  hosts:
+	  var:
+	   sespackage: sesquipedalianism
+              [key]         [value]
+
+	  tasks:
+	  	- name: package install
+		  yum:
+		   name: "{{ sespackage }}"
+		   state: present
+
+		- name: Start service
+		  service:
+		   name: "{{ sespackage }}"
+		   state: started
+
+# var pair may be spaced for visability
+
+- name:
+  hosts:
+  vars:
+		sespackage: sesquipedalianism
+
+----------------------------------------------------------------
+
+# if i had a long playbook can use vairble to change item throug-out play with one change of key.
+
+#example of how vars can make play cleaner or easier to write.
+
+---
+- name: copy file to remote clients
+  hosts:
+  vars:
+    srcfile: /home/ec2-user/somefile
+  tasks:
+
+		- name: cp file
+		  become: true
+		  copy:
+		    src: "{{ srcfile }}"
+		    dest: /temp
+		    owner: ec2-user
+		    group: ec2-user
+		    mode: 0644

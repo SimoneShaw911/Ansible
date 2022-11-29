@@ -1,0 +1,17 @@
+#use role
+
+---
+- name: basic install httpd
+  hosts: web_dev
+  roles:
+  - basicinstall_httpd
+
+- name: open port 80 for access
+  hosts: web_dev
+  roles:
+  - port80_access
+
+- name: reload firewalld
+  hosts: web_dev
+  roles:
+  - reload_http

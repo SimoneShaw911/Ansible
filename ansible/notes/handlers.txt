@@ -1,0 +1,26 @@
+# are executed at end of play once all task are finish
+# or only when change made to machine config
+# are task that run only when "NOTIFIED"
+		
+	- name:
+	  firewalld
+	    service: http
+	    permanent: true
+	    state: enabled
+	  notify:
+	  - Reload firewalld
+
+	- name:
+	  service:
+	    name:
+	    state:
+
+	handlers:
+	  - name: reload firewalld
+	    service:
+		name: firewalld
+		state: reloaded 
+
+# examples of this is like when firewalld need to be reloaded to pick up changes
+
+

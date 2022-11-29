@@ -1,0 +1,8 @@
+# example of how a playbook can be composed of plays to make for a cleaner play
+# on multiple server
+
+---
+- name: Full install
+  hosts: web_dev
+  roles:
+  - full_install_httpd

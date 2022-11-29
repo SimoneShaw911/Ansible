@@ -1,0 +1,18 @@
+---
+- name: install firewalld
+  hosts: client2
+  vars:
+    fire: firewalld
+
+  tasks:
+  - name: install package
+    yum:
+      name: "{{ fire }}"
+      state: present
+    tags: install
+
+  - name: start service
+    service:
+      name: "{{ fire }}"
+      state: started
+    tags: start

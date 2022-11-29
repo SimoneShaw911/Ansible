@@ -1,0 +1,12 @@
+---
+- name: install packages
+  hosts: client2
+  vars:
+    packages: [ftp,telnet,htop]
+
+  tasks:
+          - name:
+            yum:
+              name: '{{packages}}'
+              state: present
+            

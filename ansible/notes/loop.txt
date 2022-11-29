@@ -1,0 +1,34 @@
+# a loop is a powerful tool that allows you to execute a set of commands repeatedly
+# example
+	- changing permissions on hundreds of file
+	- creating multiple user at once
+	- installing many packages on hundreds of servers
+
+# loops work hand in hand with conditions
+
+# adding "loop" params
+	- name:
+	  hosts:
+	  
+	  tasks:
+	  - name: create users
+	    user:
+		name: "{{ item }}"  
+	    loop:
+		- jerry
+		- kramer
+		- eliane
+
+# adding variable
+
+	- name:
+	  hosts:
+	  vars:
+	    users: [jerry,kramer,eliane]
+
+	  tasks:
+	  - name: create users
+	    user:
+	      name: '{{item}}'
+	    with_items: '{{users}}'
+

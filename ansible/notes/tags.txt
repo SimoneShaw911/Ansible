@@ -1,0 +1,31 @@
+#tags can be used to target spicific tasks within playbook.
+
+#tags must be fully vertically aline with name of task. with the module of choice
+
+		- name: Setup Apache server
+		  hosts:
+		  tasks:
+		  		- name: install httpd
+				  yum:
+				   name: httpd
+				   state: present
+				  tags: i-httpd
+
+				- name: start httpd....
+#syntax to call task with tag
+
+		ansible-playbook httpbytags.yml -t s-htttp
+					flag-->	(-t, --tags)
+
+#you can run a playbook and skip a task
+
+		ansible-playbook httpbytags.yml --skip-tags i-httpd
+
+#start play at specific tasks with  "tasks option"                                           
+		ansible-playbook httpbytags.yml --start-at-task s-httpd
+						[task option]
+						flag ^ (uses task instead of tags)
+
+# list task within playbook
+
+		ansible-playbook httpbytags.yml --list-tags

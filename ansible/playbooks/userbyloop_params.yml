@@ -1,0 +1,12 @@
+---
+- name: create user by loop param
+  hosts: client2
+
+  tasks:
+    - name: create user
+      user:
+        name: "{{ item }}"
+      loop:
+        - aylin
+        - aceyn
+        - alessia
