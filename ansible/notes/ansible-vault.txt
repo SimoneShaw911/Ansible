@@ -1,0 +1,20 @@
+# use ansible-vault to encrypt playbook when sharing over network.
+# must use flag --ask-vault-pass to run correctly
+# encrypt with: 
+		ansible-vault create example.yml
+# input password..
+# to run a vaulted yml file:
+
+		ansible-playbook example.yml --ask-vault-pass
+
+# to veiw a vaulted yml file:
+		
+		ansible-vault view example.yml
+
+# to edit existing vaulted yml file:
+
+		ansible-vault edit example.yml
+
+# in order to encrypt a yml that has already been created
+
+		ansible-vault encrypt exmaple.yml

@@ -1,0 +1,7 @@
+# can encrypt strings in playbook
+		ansible-vault encrypt_string 
+
+# must add variable of encrypted string
+
+
+

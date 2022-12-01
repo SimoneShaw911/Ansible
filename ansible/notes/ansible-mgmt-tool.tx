@@ -1,0 +1,15 @@
+# ansible AWX
+		web app provides user interface, REST, API, and task engine for ansible.
+
+#it is the upstream product. changes done awx before ansible tower.
+
+  pros
+# hosted on github 
+# not recomended for production 
+# all functions as ansible tower
+# great for proof of concept
+
+  cons
+# multiple releases one day
+
+# AnsibleTower

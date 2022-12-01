@@ -1,0 +1,16 @@
+---
+- name:
+  hosts:
+  become: yes
+
+  tasks: 
+          - name: update system
+            yum:
+              name: '*'
+              state: latest
+
+          - name: reboot
+            ansible.builtin.service:
+              state: reloaded
+
+          - name: install
