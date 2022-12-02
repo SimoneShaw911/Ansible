@@ -1,0 +1,19 @@
+Getting started guide:
+
+Login to instance using SSH via key based authentication. Use "ubuntu" as userid
+(refer https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html for details on how to connect using putty/ssh)
+Once connected using ssh/putty, run below command to set the password for "ubuntu" user on the terminal
+sudo passwd ubuntu
+Once the password is set for ubuntu user, from your local windows machine, goto start menu.
+On the start menu, search & select "remote desktop connection" .
+In the "remote desktop connection" wizard, provide public IP of your instance & click connect.
+In the displayed window, provide "ubuntu" as userid & password set in step 2 above.
+Now you are connected to the desktop environment of the VM where you can access out of box environment for Ansible AWX Tower .
+For Web Interface,Login to the VM using ssh/putty
+9.Run below command to see the default username and auto-generated password
+cat /home/ubuntu/ansible_awx_password.txt
+If you see blank password in the file, wait for 2 minutes and run "cat" command again.
+open the url http://<your-public-ip> in browser
+Use  default userid & auto-generated password from step 9  to login to web interface
+You must change the default id and password as security measures by going to admin profile page and entering new userid and password
+
