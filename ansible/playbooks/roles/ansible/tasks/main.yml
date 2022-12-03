@@ -1,0 +1,10 @@
+---
+- name: Enable amazon-linux-extras package
+  shell: amazon-linux-extras enable postgresql14
+  args:
+    creates: /usr/bin/amazon-linux-extras
+
+- name: add package
+  ansible.builtin.yum:
+    name: ansible2
+    state: present

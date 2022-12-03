@@ -1,0 +1,29 @@
+---
+- name: Set up personal environment
+  hosts:
+  become: yes
+
+  tasks:
+    - name: update instance
+      yum:
+        name: update
+        state: latest
+
+    - name: uprgrade instance
+      yum:
+        name: upgrade
+        state: latest
+
+    - name: install ansible2 with amazon extra-library
+      shell:
+        cmd: amazon-linux-extras install ansible2
+
+    - name: install packages
+      yum:
+        name: "{{ item  }}"
+        state: present
+      with_items:
+      - git
+      - docker
+      - gh
+      - 
