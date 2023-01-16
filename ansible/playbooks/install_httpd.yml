@@ -1,6 +1,6 @@
 ---
 - name: Setup httpd and open firewall port
-  hosts: web_dev
+  hosts: localhost
   become: yes
 
   tasks:
