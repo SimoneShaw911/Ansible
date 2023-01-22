@@ -1,0 +1,11 @@
+- name: launching aws instance with Ansible
+  ec2:
+    key_name: devops_01
+      region: us-east-1
+      instance_type: '{{ instance_type }}'
+      image: ami-0b5eea76982371e91
+      wait: true
+      wait_timeout: 600
+      instance_tags:
+        Name: '{{ nametag }}'
+    register: ec2

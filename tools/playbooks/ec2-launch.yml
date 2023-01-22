@@ -4,12 +4,7 @@
   become: yes
   gather_facts: False
 
-  vars:
-    sourcefile:
-    ans-hostfile: /etc/ansible/hosts
-    ans-pubkey: ~/.ssh/ans-pubkey.pub
-
-  vars_promt:
+  vars_prompt:
 
     - name: nametag
       prompt: Enter a name tag.
@@ -29,26 +24,18 @@
       region: us-east-1
       instance_type: '{{ instance_type }}'
       image: ami-0b5eea76982371e91
-      assign_public_ip: yes
       wait: yes
       wait_timeout: 600
       instance_tags:
         Name: '{{ nametag }}'
     register: ec2
 
-  - name: wait for ssh
-    wait_for:
-      host: '{{ item.public_ip }}'
-      port: 22
-      state: started
-    with_items: ec2.instances
-
-  - name: add host to host inventory file
-    add_host:
-      hostname: "{{ item.public_ip }}"
-      groupname: webserver
-    with_items: ec2.instances
-
-
-
+  - name: add instance to host file
+    lineinfile:
+      dest: /etc/ansible/hosts
+      regexp: '{{ item.public_ip }}'
+      insertafter: 'new_server'
+      line: "{{ item.public_ip }}"
+      state: present
+    with_items: '{{ ec2.instances }}'
 
