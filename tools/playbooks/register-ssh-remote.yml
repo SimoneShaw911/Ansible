@@ -1,0 +1,28 @@
+---
+
+- name: Register ssh access for ansible on remote server.
+  hosts: new_server
+  become: yes
+
+  vars_prompt:
+    
+    - name: hostname
+      prompt: Enter host ip/dns/group.
+      private: false
+
+    - name: username
+      prompt: Enter remote user.
+      default: ec2-user
+      private: false
+
+
+  tasks:
+
+    - name: Copy SSH to remote
+      authorized_key:
+        user: "{{ username }}"
+        state: present
+        key: "{{ lookup('file', item) }}"
+      with_fileglob:
+      - ans-key.pub
+      become: true
