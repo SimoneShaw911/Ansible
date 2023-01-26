@@ -1,0 +1,13 @@
+---
+- name: ec2 instance stop
+  hosts: localhost
+  tasks:
+    
+    - name: Stopping ec2 with ansible.
+
+    ec2:
+      state: stopped
+      region: us-east-1
+      inatnce_tags:
+        Name: WEB_1
+

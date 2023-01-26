@@ -1,0 +1,17 @@
+---
+- name: Copy public key to remote server.
+  hosts: localhost
+  become: yes
+  gather_facts: no
+
+  vars_promt:
+
+    - name: pubkey
+      prompt: Enter pubkey name
+      default: ~/.ssh/id_rsa.pub 
+
+  tasks:
+
+    - name: copy public key
+      command: ssh -i ~/.ssh/id_rsa.pub 
+      

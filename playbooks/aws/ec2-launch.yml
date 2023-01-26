@@ -15,15 +15,38 @@
       default: t2.micro
       private: no
 
+    - name: region
+      prompt: Enter a region.
+      default: us-east-1
+      private: no
+
+    - name: image
+      prompt: Please enter ami image number.
+      default: ami-0b5eea76982371e91
+      private: no
+
+    - name: inventory_group
+      prompt: Enter group name in hostfile in which ip will be added.
+      default: new_server
+      private: no
+
+    - name: default_user
+      prompt: Enter default user of AMI instance
+      default: ec2-user
+      private: no
+
+  vars:
+    remote_ssh_path: /.ssh/authorized_keys 
+
   tasks:
   
   - name: launching aws instance with Ansible
 
     ec2:
       key_name: devops_01
-      region: us-east-1
+      region: '{{ region }}'
       instance_type: '{{ instance_type }}'
-      image: ami-0b5eea76982371e91
+      image: '{{ image }}'
       wait: yes
       wait_timeout: 600
       instance_tags:
@@ -34,7 +57,7 @@
     lineinfile:
       dest: /etc/ansible/hosts
       regexp: '{{ item.public_ip }}'
-      insertafter: 'new_server'
+      insertafter: '{{ inventory_group }}'
       line: "{{ item.public_ip }}"
       state: present
     with_items: '{{ ec2.instances }}'

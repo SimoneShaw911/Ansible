@@ -1,0 +1,23 @@
+---
+- name: Start ec2 instance
+  hosts: localhost
+  vars_prompt:
+    - name: instance_name
+      prompt: Enter ec2 tag name.
+      private: false
+
+    - name: region
+      prompt: enter ec2 region.
+      default: us-east-1
+      private: false
+
+  tasks:
+
+    - name: starting ec2 instance
+
+      ec2:
+        state: started
+        region: '{{ region }}'
+        instance_tags:
+          Name: '{{ instance_name}}'
+
