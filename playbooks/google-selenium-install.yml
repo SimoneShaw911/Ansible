@@ -1,0 +1,7 @@
+### installing google-chrome, chromedriver & selenium
+
+---
+- name: Install Chromedriver for html
+  hosts:
+
+  tasks: Inst

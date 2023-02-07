@@ -1,6 +1,6 @@
 ---
 - name: Setup httpd and open firewall port
-  hosts: new_server
+  hosts: website 
   become: yes
 
   tasks:

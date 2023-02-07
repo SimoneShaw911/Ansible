@@ -27,7 +27,7 @@
 
     - name: inventory_group
       prompt: Enter group name in hostfile in which ip will be added.
-      default: host_to_add_pubkey
+      default: webgroup
       private: no
 
     - name: security_group
@@ -46,8 +46,9 @@
       private: no
 
   vars:
-    remote_ssh_path: /.ssh/authorized_keys 
+    remote_ssh_path: /.ssh/authorized_keys
 
+  
   tasks:
   
   - name: launching aws instance with Ansible
@@ -70,7 +71,7 @@
       dest: /etc/ansible/hosts
       regexp: '{{ item.public_ip }}'
       insertafter: '{{ inventory_group }}'
-      line: "{{ item.public_ip }}"
+      line: '{{ nametag }} ansible_host={{ item.public_ip }}'
       state: present
     with_items: '{{ ec2.instances }}'
 
