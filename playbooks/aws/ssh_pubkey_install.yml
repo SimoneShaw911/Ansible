@@ -1,0 +1,22 @@
+---
+- name: Install ssh public key into remote server.
+  hosts: launched
+  become: True
+  gather_facts: True
+  
+
+  tasks:
+    
+    - name: Copy the key add to authorized_keys using Ansible module
+      tags: run
+      authorized_key:
+        user: ec2-user
+        state: present
+        key: "{{ lookup('file','buffer/{{item}}-id_rsa.pub')}}"
+      when: "{{ item != ansible_hostname }}"
+      with_items: 
+        - "{{ groups['launched'] }}"
+
+          #- name: add the public key into Authorized_keys file to enable Key Auth
+          #shell: "cat /tmp/remote-id_rsa.pub >> ~/.ssh/authorized_keys"
+          #register: addtoauth

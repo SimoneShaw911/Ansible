@@ -1,0 +1,24 @@
+---
+- name: "Playbook to Add Key to Newly Provisioned EC2 Instance"
+  hosts: host_to_add_pubkey
+
+  
+  vars_prompt:
+
+    - name: ec2user
+      prompt: Enter username for remote instance
+      default: ec2-user
+      private: no
+
+    - name: status
+      prompt: Indicate wether to add or delete ssh-key [ present/absent ]
+      default: present
+      private: no  
+    
+  tasks:
+
+  - name: "Copy the authorized key file from"
+    authorized_key:
+      user: "{{ ec2user }}"
+      state: "{{ status }}"
+      key: "{{ lookup('file', '/home/ec2-user/.ssh/id_rsa.pub')}}"

@@ -1,0 +1,18 @@
+### copy ansible ssh key into remote server
+
+---
+- name:
+  hosts:
+  become: yes
+  gather_facts: no
+
+  vars_promt:
+    
+    - name: access_key
+      prompt: Please enter name of key
+      default: ~/.ssh/web_server_key
+      private: no
+
+  tasks:
+
+    - name: copy ansible access key into authorized keys file
