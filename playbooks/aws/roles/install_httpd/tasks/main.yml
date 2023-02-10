@@ -1,41 +1,38 @@
 ---
-- name: fresh install & port acces httpd, firewalld.
+    - name: update packages
+      yum:
+        name: '*'
+        state: latest
 
-  tasks:
-          - name: update packages
-            yum:
-              name: '*'
-              state: latest
+    - name: install firewalld
+      yum:
+        name: firewalld
+        state: present
 
-          - name: install firewalld
-            yum:
-              name: firewalld
-              state: present
+    - name: start firewalld
+      service:
+        name: firewalld
+        state: started
 
-          - name: start firewalld
-            service:
-              name: firewalld
-              state: started
+    - name: install httpd
+      yum:
+        name: httpd
+        state: present
 
-          - name: install httpd
-            yum:
-              name: httpd
-              state: present
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
 
-          - name: start httpd
-            service:
-              name: httpd
-              state: started
+    - name: open port 80 for http access
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
 
-          - name: open port 80 for http access
-            firewalld:
-              service: http
-              permanent: true
-              state: enabled
-
-          - name: Restart firewall to load changes
-            service:
-              name: firewalld
-              state: reloaded
+    - name: Restart firewall to load changes
+      service:
+        name: firewalld
+        state: reloaded
 
 

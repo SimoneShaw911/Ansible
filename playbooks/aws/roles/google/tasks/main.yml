@@ -1,0 +1,7 @@
+###
+---
+- name: Installing google-chrome
+  ansible.builtin.shell: |
+    curl https://intoli.com/install-google-chrome.sh | bash
+    mv ~/bin/google-chrome-stable ~/bin/google-chrome
+  register: command_output1

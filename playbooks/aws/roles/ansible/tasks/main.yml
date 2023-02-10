@@ -1,0 +1,9 @@
+---
+- name: install ansible
+  shell:
+    cmd: amazon-linux-extras install ansible2
+
+- name: check package
+  yum:
+    name: ansible
+    state: present

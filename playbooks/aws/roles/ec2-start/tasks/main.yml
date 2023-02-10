@@ -16,7 +16,7 @@
     - name: starting ec2 instance
 
       ec2:
-        state: started
+        state: running
         region: '{{ region }}'
         instance_tags:
           Name: '{{ instance_name}}'
