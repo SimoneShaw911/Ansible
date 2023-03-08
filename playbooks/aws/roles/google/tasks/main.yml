@@ -2,6 +2,8 @@
 ---
 - name: Installing google-chrome
   ansible.builtin.shell: |
-    curl https://intoli.com/install-google-chrome.sh | bash
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+    sudo yum install ./google-chrome-stable_current_x86_64.rpm
     mv ~/bin/google-chrome-stable ~/bin/google-chrome
+    wget https://intoli.com/install-google-chrome.sh | bash
   register: command_output1
