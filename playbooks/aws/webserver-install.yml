@@ -3,14 +3,12 @@
 
 ---
 - name: Install packages amazon linux server
-  hosts: web3
+  hosts: docker/registry
   remote_user: ec2-user
   become: yes
 
   roles:
     - install_httpd
-    - chrome-driver
-    - google
 
   tasks:
 
