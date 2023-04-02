@@ -3,7 +3,7 @@
 
 ---
 - name: Install packages amazon linux server
-  hosts: "{{ myhosts | default('default')}}"
+  hosts: "{{ myhosts | default('safe')}}"
   remote_user: ec2-user
   become: yes
 
