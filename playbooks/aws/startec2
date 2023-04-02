@@ -47,13 +47,10 @@
       with_items: '{{ ec2.instances }}'
 
     - name: add new host nametag to ssh agent config
-      blockinfile:
+      lineinfile:
         dest: /home/ec2-user/.ssh/config
-        marker: '{mark} {{ block_marker }}'
-        marker_begin: "Begin"
-        marker_end: "End"
         insertafter: '\n'
-        block: |
+        line: |
           Host {{ instance_name }} 
           Hostname {{ item.public_ip }}
         state: present

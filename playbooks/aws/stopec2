@@ -1,0 +1,55 @@
+---
+- name: Stop ec2 instance
+  hosts: localhost
+  become: yes
+  gather_facts: False
+  
+  vars_prompt:
+    - name: instance_name
+      prompt: Enter ec2 tag name.
+      private: false
+
+    - name: inventory_group
+      prompt: Enter group name in hostfile in which ip will be removed.
+      default: webgroup
+      private: false
+
+    - name: region
+      prompt: enter ec2 region.
+      default: us-east-1
+      private: false
+
+  tasks:
+
+    - name: stoppin  ec2 instance
+
+      ec2:
+        instance_tags:
+          Name: "{{ instance_name }}"
+        region: '{{ region }}'
+        state: stopped
+      register: ec2
+
+    - name: remove host ipv4 from group
+      lineinfile:
+        path: /etc/ansible/hosts
+        line: '{{ instance_name }} ansible_host={{ item.public_ip }}'
+        state: absent
+        backup: yes
+      with_items: '{{ ec2.instances }}'
+
+    - name: remove host with nametag from ssh config
+      lineinfile:
+        path: /home/ec2-user/.ssh/config
+        state: absent
+        regexp: 'Host'
+        line: "Host '{{ instance_name }}'"
+      with_items: '{{ec2.instances}}'
+
+   ###- name:removing public ip to host tagname
+   ###lineinfile:
+   ### path: /home/ec2-user/.ssh/config
+   ###insertafter: '\n'
+   ###line: 'HostName {{ item.public_ip }}'
+   ### state: present
+   ###with_ite{{ instance_name }} ansible_host={{ item.public_ip }}'ms: '{{ ec2.instances }}'
