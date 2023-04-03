@@ -1,0 +1,15 @@
+---
+- name: quick installations via role(s)(max10).
+  hosts: "{{ myhosts | default('safe')}}" 
+  
+  roles:
+  - "{{ role1 | default('')}}"
+  - "{{ role2 | default('')}}"
+  - "{{ role3 | default('')}}"
+  - "{{ role4 | default('')}}"
+  - "{{ role5 | default('')}}"
+  - "{{ role6 | default('')}}"
+  - "{{ role7 | default('')}}"
+  - "{{ role8 | default('')}}"
+  - "{{ role9 | default('')}}"
+  - "{{ role10 | default('')}}"

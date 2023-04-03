@@ -1,3 +1,9 @@
 ---
 - name: install virtual environment
-  command:
+  command: pip install virtualenv
+  register: output
+
+- name: print command output
+  debug:
+    msg: "{{ output.stdout }}"
+  
